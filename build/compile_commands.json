@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/theolaos/Documents/omilos/learning_opengl/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/learning_opengl.dir/main.cpp.o -c /home/theolaos/Documents/omilos/learning_opengl/main.cpp",
+  "file": "/home/theolaos/Documents/omilos/learning_opengl/main.cpp",
+  "output": "CMakeFiles/learning_opengl.dir/main.cpp.o"
+}
+]
