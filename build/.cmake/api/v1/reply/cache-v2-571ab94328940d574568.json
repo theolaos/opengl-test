@@ -1218,6 +1218,30 @@
 			"value" : "FALSE"
 		},
 		{
+			"name" : "OpengGL_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for OpengGL."
+				}
+			],
+			"type" : "PATH",
+			"value" : "OpengGL_DIR-NOTFOUND"
+		},
+		{
+			"name" : "Openg_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Openg."
+				}
+			],
+			"type" : "PATH",
+			"value" : "Openg_DIR-NOTFOUND"
+		},
+		{
 			"name" : "Project_BINARY_DIR",
 			"properties" : 
 			[

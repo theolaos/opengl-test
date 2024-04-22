@@ -1,8 +1,14 @@
 [
 {
   "directory": "/home/theolaos/Documents/omilos/learning_opengl/build",
-  "command": "/usr/bin/g++   -g -o CMakeFiles/learning_opengl.dir/main.cpp.o -c /home/theolaos/Documents/omilos/learning_opengl/main.cpp",
-  "file": "/home/theolaos/Documents/omilos/learning_opengl/main.cpp",
-  "output": "CMakeFiles/learning_opengl.dir/main.cpp.o"
+  "command": "/usr/bin/gcc   -g -o CMakeFiles/learning_opengl.dir/src/glad/glad.c.o -c /home/theolaos/Documents/omilos/learning_opengl/src/glad/glad.c",
+  "file": "/home/theolaos/Documents/omilos/learning_opengl/src/glad/glad.c",
+  "output": "CMakeFiles/learning_opengl.dir/src/glad/glad.c.o"
+},
+{
+  "directory": "/home/theolaos/Documents/omilos/learning_opengl/build",
+  "command": "/usr/bin/g++   -g -o CMakeFiles/learning_opengl.dir/src/main.cpp.o -c /home/theolaos/Documents/omilos/learning_opengl/src/main.cpp",
+  "file": "/home/theolaos/Documents/omilos/learning_opengl/src/main.cpp",
+  "output": "CMakeFiles/learning_opengl.dir/src/main.cpp.o"
 }
 ]

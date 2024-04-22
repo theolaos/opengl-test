@@ -129,29 +129,53 @@ learning_opengl/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/learning_opengl.dir/build.make CMakeFiles/learning_opengl.dir/build
 .PHONY : learning_opengl/fast
 
-main.o: main.cpp.o
-.PHONY : main.o
+src/glad/glad.o: src/glad/glad.c.o
+.PHONY : src/glad/glad.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/learning_opengl.dir/build.make CMakeFiles/learning_opengl.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/glad/glad.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learning_opengl.dir/build.make CMakeFiles/learning_opengl.dir/src/glad/glad.c.o
+.PHONY : src/glad/glad.c.o
 
-main.i: main.cpp.i
-.PHONY : main.i
+src/glad/glad.i: src/glad/glad.c.i
+.PHONY : src/glad/glad.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/learning_opengl.dir/build.make CMakeFiles/learning_opengl.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/glad/glad.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learning_opengl.dir/build.make CMakeFiles/learning_opengl.dir/src/glad/glad.c.i
+.PHONY : src/glad/glad.c.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+src/glad/glad.s: src/glad/glad.c.s
+.PHONY : src/glad/glad.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/learning_opengl.dir/build.make CMakeFiles/learning_opengl.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/glad/glad.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learning_opengl.dir/build.make CMakeFiles/learning_opengl.dir/src/glad/glad.c.s
+.PHONY : src/glad/glad.c.s
+
+src/main.o: src/main.cpp.o
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learning_opengl.dir/build.make CMakeFiles/learning_opengl.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learning_opengl.dir/build.make CMakeFiles/learning_opengl.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learning_opengl.dir/build.make CMakeFiles/learning_opengl.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -162,9 +186,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... learning_opengl"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... src/glad/glad.o"
+	@echo "... src/glad/glad.i"
+	@echo "... src/glad/glad.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

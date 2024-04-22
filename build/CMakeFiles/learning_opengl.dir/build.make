@@ -69,31 +69,47 @@ include CMakeFiles/learning_opengl.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/learning_opengl.dir/flags.make
 
-CMakeFiles/learning_opengl.dir/main.cpp.o: CMakeFiles/learning_opengl.dir/flags.make
-CMakeFiles/learning_opengl.dir/main.cpp.o: /home/theolaos/Documents/omilos/learning_opengl/main.cpp
-CMakeFiles/learning_opengl.dir/main.cpp.o: CMakeFiles/learning_opengl.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/theolaos/Documents/omilos/learning_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/learning_opengl.dir/main.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/learning_opengl.dir/main.cpp.o -MF CMakeFiles/learning_opengl.dir/main.cpp.o.d -o CMakeFiles/learning_opengl.dir/main.cpp.o -c /home/theolaos/Documents/omilos/learning_opengl/main.cpp
+CMakeFiles/learning_opengl.dir/src/glad/glad.c.o: CMakeFiles/learning_opengl.dir/flags.make
+CMakeFiles/learning_opengl.dir/src/glad/glad.c.o: /home/theolaos/Documents/omilos/learning_opengl/src/glad/glad.c
+CMakeFiles/learning_opengl.dir/src/glad/glad.c.o: CMakeFiles/learning_opengl.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/theolaos/Documents/omilos/learning_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/learning_opengl.dir/src/glad/glad.c.o"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/learning_opengl.dir/src/glad/glad.c.o -MF CMakeFiles/learning_opengl.dir/src/glad/glad.c.o.d -o CMakeFiles/learning_opengl.dir/src/glad/glad.c.o -c /home/theolaos/Documents/omilos/learning_opengl/src/glad/glad.c
 
-CMakeFiles/learning_opengl.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/learning_opengl.dir/main.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/theolaos/Documents/omilos/learning_opengl/main.cpp > CMakeFiles/learning_opengl.dir/main.cpp.i
+CMakeFiles/learning_opengl.dir/src/glad/glad.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/learning_opengl.dir/src/glad/glad.c.i"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/theolaos/Documents/omilos/learning_opengl/src/glad/glad.c > CMakeFiles/learning_opengl.dir/src/glad/glad.c.i
 
-CMakeFiles/learning_opengl.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/learning_opengl.dir/main.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/theolaos/Documents/omilos/learning_opengl/main.cpp -o CMakeFiles/learning_opengl.dir/main.cpp.s
+CMakeFiles/learning_opengl.dir/src/glad/glad.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/learning_opengl.dir/src/glad/glad.c.s"
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/theolaos/Documents/omilos/learning_opengl/src/glad/glad.c -o CMakeFiles/learning_opengl.dir/src/glad/glad.c.s
+
+CMakeFiles/learning_opengl.dir/src/main.cpp.o: CMakeFiles/learning_opengl.dir/flags.make
+CMakeFiles/learning_opengl.dir/src/main.cpp.o: /home/theolaos/Documents/omilos/learning_opengl/src/main.cpp
+CMakeFiles/learning_opengl.dir/src/main.cpp.o: CMakeFiles/learning_opengl.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/theolaos/Documents/omilos/learning_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/learning_opengl.dir/src/main.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/learning_opengl.dir/src/main.cpp.o -MF CMakeFiles/learning_opengl.dir/src/main.cpp.o.d -o CMakeFiles/learning_opengl.dir/src/main.cpp.o -c /home/theolaos/Documents/omilos/learning_opengl/src/main.cpp
+
+CMakeFiles/learning_opengl.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/learning_opengl.dir/src/main.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/theolaos/Documents/omilos/learning_opengl/src/main.cpp > CMakeFiles/learning_opengl.dir/src/main.cpp.i
+
+CMakeFiles/learning_opengl.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/learning_opengl.dir/src/main.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/theolaos/Documents/omilos/learning_opengl/src/main.cpp -o CMakeFiles/learning_opengl.dir/src/main.cpp.s
 
 # Object files for target learning_opengl
 learning_opengl_OBJECTS = \
-"CMakeFiles/learning_opengl.dir/main.cpp.o"
+"CMakeFiles/learning_opengl.dir/src/glad/glad.c.o" \
+"CMakeFiles/learning_opengl.dir/src/main.cpp.o"
 
 # External object files for target learning_opengl
 learning_opengl_EXTERNAL_OBJECTS =
 
-learning_opengl: CMakeFiles/learning_opengl.dir/main.cpp.o
+learning_opengl: CMakeFiles/learning_opengl.dir/src/glad/glad.c.o
+learning_opengl: CMakeFiles/learning_opengl.dir/src/main.cpp.o
 learning_opengl: CMakeFiles/learning_opengl.dir/build.make
 learning_opengl: CMakeFiles/learning_opengl.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/theolaos/Documents/omilos/learning_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable learning_opengl"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/theolaos/Documents/omilos/learning_opengl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable learning_opengl"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/learning_opengl.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
