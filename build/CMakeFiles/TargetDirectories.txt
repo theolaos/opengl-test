@@ -1,3 +1,0 @@
-/home/theolaos/Documents/omilos/learning_opengl/build/CMakeFiles/learning_opengl.dir
-/home/theolaos/Documents/omilos/learning_opengl/build/CMakeFiles/edit_cache.dir
-/home/theolaos/Documents/omilos/learning_opengl/build/CMakeFiles/rebuild_cache.dir
