@@ -2,3 +2,5 @@
 build/
 test.cpp
 /.vscode
+a.out
+CMakeFiles/
