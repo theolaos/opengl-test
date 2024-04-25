@@ -14,6 +14,8 @@ int main(int argc, char *argv[]){
 
     int *px = &x;
 
+    *px = 5;
+
     struct Person people[100];
 
     struct Person *p_person = (struct Person *)&people;
