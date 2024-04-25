@@ -32,6 +32,25 @@ void processInput(GLFWwindow *window, int *p_x, int *p_y)
     if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
         *p_x += 10;
     }
+
+    //Collision for the window
+
+    if (*p_x < 0){
+        *p_x = 0;
+    }
+    if (*p_x > 1920-800)
+    {
+        *p_x = 1920-800;
+    }
+    
+    if (*p_y < 0 ){
+        *p_y = 0;
+    }
+    if (*p_y > 1080-600)
+    {
+        *p_y = 1080-600;
+    }
+    
 }
 
 
