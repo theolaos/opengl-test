@@ -15,42 +15,11 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 }
 
 
-void processInput(GLFWwindow *window, int *p_x, int *p_y)
+void processInput(GLFWwindow *window)
 {
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, true);
     }
-    if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
-        *p_y -= 10;
-    }
-    if(glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS){
-        *p_y += 10;
-    }
-    if(glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS){
-        *p_x -= 10;
-    }
-    if(glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS){
-        *p_x += 10;
-    }
-
-    //Collision for the window
-
-    if (*p_x < 0){
-        *p_x = 0;
-    }
-    if (*p_x > 1920-800)
-    {
-        *p_x = 1920-800;
-    }
-    
-    if (*p_y < 0 ){
-        *p_y = 0;
-    }
-    if (*p_y > 1080-600)
-    {
-        *p_y = 1080-600;
-    }
-    
 }
 
 
@@ -80,24 +49,39 @@ int main()
     // We register the callback functions here, before the while loop, and after the window init
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    int x = 0;
-    int y = 0;
 
+    float vertices[] = {
+        -0.5f, -0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f,
+         0.0f,  0.5f, 0.0f,
+    };
 
-    x = 1920/2-800/2;
-    y = 1080/2-600/2;
+    unsigned int VBO;
 
-    int *p_x = &x;
-    int *p_y = &y;
+    // It stores the id to the VBO variable
+    glGenBuffers(1, &VBO);
 
+    // debunking some stuff
+    std::cout << VBO << std::endl;
+    std::cout << &VBO << std::endl;
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    /*
+    Quoting from the book:
+    • GL_STREAM_DRAW: the data is set only once and used by the GPU at most a few times.
+    • GL_STATIC_DRAW: the data is set only once and used many times.
+    • GL_DYNAMIC_DRAW: the data is changed a lot and used many times
+    */
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 
     // while loop of the game
     while(!glfwWindowShouldClose(window)) {
+        processInput(window);
 
-        processInput(window, p_x, p_y);
-
-        glfwSetWindowPos(window,x,y);
+        //glfwSetWindowPos(window,x,y);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
