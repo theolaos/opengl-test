@@ -13,6 +13,9 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
 void shaderCompileInfo(unsigned int &shader, const char *shader_type);
 void shaderProgramInfo(unsigned int &program);
+unsigned int compileShader(unsigned int type, const std::string &source);
+unsigned int createShader(const std::string &vertexShader, const std::string &fragmentShader);
+
 
 
 const unsigned int SCR_WIDTH = 800;
@@ -62,48 +65,10 @@ int main(int argc, char *argv[])
 
 
     // SHADERS ACTION 
-    unsigned int vertexShader;
-    // We are passing the GL_VERTEX_SHADER because that's the shader we want to create now
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-    // we attach the vertex source to the vertex object
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    // Compiling the attached source in vertex object
-    glCompileShader(vertexShader);
-
-    // getting the compile info from the vertex shader
-    shaderCompileInfo(vertexShader, "VERTEX");
-    unsigned int fragmentShader;
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    // attaching the source to the fragment object
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    // compiling the attached source in the fragment object
-    glCompileShader(fragmentShader);
-
-    // getting the compile info from the fragment shader
-    shaderCompileInfo(fragmentShader, "FRAGMENT");
-
-    // Creating a program to link the compiled shaders
-
-    unsigned int shaderProgram;
-    // glCreateProgram returns the ID to the newly created Program
-    shaderProgram = glCreateProgram();
-    
-    // we ater attach the shaders to the ID given
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-
-    // checking for errors in the linking proccess
-    shaderProgramInfo(shaderProgram);
-
-    // deleting the compiled shaders
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    unsigned int shaderProgram = createShader(vertexShaderSource,fragmentShaderSource);
 
 
-
-    float vertices[] = {
+    float vertices[9] = {
         -0.5f, -0.5f, 0.0f,
          0.5f, -0.5f, 0.0f,
          0.0f,  0.5f, 0.0f,
@@ -131,7 +96,7 @@ int main(int argc, char *argv[])
     • GL_DYNAMIC_DRAW: the data is changed a lot and used many times
     */
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), vertices, GL_STATIC_DRAW);
 
 
     /* parameters
@@ -205,12 +170,11 @@ void shaderCompileInfo(unsigned int &shader, const char *shader_type)
 
     if(!success) {
         glGetShaderInfoLog(shader, 512, NULL, infoLog);
-        coloredText("ERROR",red);
+        coloredText("ERROR", color::red);
         std::cout << "::SHADER::"<< shader_type << "::COMPILATION_FAILED\n" <<
         infoLog << std::endl;
     } else {
-        coloredText("SUCCESS",green);
-        std::cout << "::SHADER::"<< shader_type << "::COMILATION_SUCCEED\n" << std::endl;
+        std::cout << colorText("SUCCESS", color::green, true) << "::SHADER::"<< shader_type << "::COMILATION_SUCCEED\n" << std::endl;
     }
 }
 
@@ -231,4 +195,39 @@ void shaderProgramInfo(unsigned int &program)
         coloredText("SUCCESS", green);
         std::cout << "::PROGRAM::LINKING_SUCCEED\n" << std::endl;
     }
+}
+
+
+unsigned int compileShader(unsigned int type, const std::string &source)
+{
+    unsigned int id = glCreateShader(type);
+    const char *src = source.c_str();
+    glShaderSource(id, 1, &src, NULL);
+    glCompileShader(id);
+
+    shaderCompileInfo(id, (type == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT"));
+
+    return id;
+} 
+
+
+unsigned int createShader(const std::string &vertexShader, const std::string &fragmentShader)
+{
+    unsigned int program = glCreateProgram();
+
+    unsigned int vs, fs; // vs = Vertex shader, fs = fragment shader
+
+    vs = compileShader(GL_VERTEX_SHADER, vertexShader);
+    fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader);
+
+    glAttachShader(program, vs);
+    glAttachShader(program, fs);
+    glLinkProgram(program);
+
+    shaderProgramInfo(program);
+
+    glDeleteShader(vs);
+    glDeleteShader(fs);
+
+    return program;
 }
