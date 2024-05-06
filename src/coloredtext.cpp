@@ -6,15 +6,15 @@
 const char *getColorTxt(color tcolor){
     switch (tcolor)
     {
-    case red:
+    case color::red:
         return "\033[38;2;255;0;0m";
         break;
     
-    case green:
+    case color::green:
         return "\033[38;2;0;255;0m";
         break;
 
-    case white:
+    case color::white:
         return "\033[38;2;255;255;255m";
         break;
 
@@ -24,14 +24,14 @@ const char *getColorTxt(color tcolor){
     }
 }
 
-// no std::endl
+
 void coloredText(const char *text, color tcolor, const bool endLine, const bool bReset)
 {
     const char *tclr = getColorTxt(tcolor);
 
     std::cout << tclr << text;
     if (bReset){
-        std::cout << getColorTxt(reset);
+        std::cout << getColorTxt(color::reset);
     }
 
     if (endLine) {
@@ -41,8 +41,22 @@ void coloredText(const char *text, color tcolor, const bool endLine, const bool 
 
 void cleanupColoredText(const bool endLine)
 {
-    std::cout << getColorTxt(reset);
+    std::cout << getColorTxt(color::reset);
     if (endLine) {
         std::cout << std::endl;
     }
+}
+
+std::string colorText(const char *txt, color tcolor, bool cleanup)
+{
+    std::string text = txt;
+
+    std::string tc = getColorTxt(tcolor);
+
+    std::string reset = "";
+    if (cleanup) {
+        reset = getColorTxt(color::reset);
+    }
+
+    return  tc + text + reset; 
 }
