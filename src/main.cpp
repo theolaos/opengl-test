@@ -7,7 +7,10 @@ Following the book of how to learn OpenGL
 #include <iostream>
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
-#include "colortxt.h"
+
+#include "colortxt.hpp"
+#include "readfile.hpp"
+
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -22,19 +25,8 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 // in variables are basically the vertex attributes, so aPos is a vertex attribute
-const char *vertexShaderSource = "#version 460 core\n"
-                                 "layout (location = 0) in vec3 aPos;\n" 
-                                 "void main()\n"
-                                 "{\n"
-                                 "    gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0f);\n"
-                                 "}\0";
-
-const char *fragmentShaderSource = "#version 460 core\n"
-                                   "out vec4 FragColor;\n"
-                                   "void main()\n"
-                                   "{\n"
-                                   "    FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-                                   "}\0";
+std::string vertexShaderSource = parseFile(std::string(SHADERS_PATH) + "triangle_shaders/triangle.vert");
+std::string fragmentShaderSource = parseFile(std::string(SHADERS_PATH) + "triangle_shaders/triangle.frag");
 
 
 int main(int argc, char *argv[])
@@ -65,7 +57,7 @@ int main(int argc, char *argv[])
 
 
     // SHADERS ACTION 
-    unsigned int shaderProgram = createShader(vertexShaderSource,fragmentShaderSource);
+    unsigned int shaderProgram = createShader(vertexShaderSource, fragmentShaderSource);
 
 
     float vertices[9] = {
@@ -114,9 +106,6 @@ int main(int argc, char *argv[])
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0); // from what I know: (void*)0 == NULL
 
     glEnableVertexAttribArray(0);
-
-
-
 
 
     // while loop of the game
@@ -170,8 +159,7 @@ void shaderCompileInfo(unsigned int &shader, const char *shader_type)
 
     if(!success) {
         glGetShaderInfoLog(shader, 512, NULL, infoLog);
-        coloredText("ERROR", color::red);
-        std::cout << "::SHADER::"<< shader_type << "::COMPILATION_FAILED\n" <<
+        std::cout << colorText("ERROR", color::red, true) <<"::SHADER::"<< shader_type << "::COMPILATION_FAILED\n" <<
         infoLog << std::endl;
     } else {
         std::cout << colorText("SUCCESS", color::green, true) << "::SHADER::"<< shader_type << "::COMILATION_SUCCEED\n" << std::endl;
