@@ -1,6 +1,6 @@
 // for logging
 #include <iostream> 
-#include "colortxt.h"
+#include "colortxt.hpp"
 
 
 const char *getColorTxt(color tcolor){
