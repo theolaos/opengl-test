@@ -62,11 +62,20 @@ int main(int argc, char *argv[])
     unsigned int shaderProgram = createShader(vertexShaderSource, fragmentShaderSource);
 
 
-    float vertices[9] = {
+    float vertices[12] = {
         -0.5f, -0.5f, 0.0f,
          0.5f, -0.5f, 0.0f,
-         0.0f,  0.5f, 0.0f,
+         0.5f,  0.5f, 0.0f,
+        -0.5f,  0.5f, 0.0f
     };
+
+    // it has to be unsigned
+    unsigned int indices[6] = {
+        0,1,2,
+        2,3,0
+    };
+
+
     // Generating a VBO and a VAO
     unsigned int VBO, VAO;
 
@@ -90,7 +99,7 @@ int main(int argc, char *argv[])
     • GL_DYNAMIC_DRAW: the data is changed a lot and used many times
     */
 
-    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), vertices, GL_STATIC_DRAW);
 
 
     /* parameters
@@ -109,6 +118,12 @@ int main(int argc, char *argv[])
 
     glEnableVertexAttribArray(0);
 
+    unsigned int ibo; // index buffer object
+    glGenBuffers(1, &ibo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+
+
 
     // while loop of the game
     while(!glfwWindowShouldClose(window)) {
@@ -123,7 +138,8 @@ int main(int argc, char *argv[])
         // OpenGL will use this program object everytime there is a shader or rendercall.
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3); 
+        // glDrawArrays(GL_TRIANGLES, 0, 4); 
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
         //glfwSetWindowPos(window,x,y);
 
