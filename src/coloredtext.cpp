@@ -18,6 +18,14 @@ const char *getColorTxt(color tcolor){
         return "\033[38;2;255;255;255m";
         break;
 
+    case color::yellow:
+        return "\033[38;2;255;255;255m";
+        break;
+
+    case color::light_blue:
+        return "\033[38;2;255;255;255m";
+        break;
+        
     default:
         return "\033[0m";
         break;
@@ -47,7 +55,7 @@ void cleanupColoredText(const bool endLine)
     }
 }
 
-std::string colorText(const char *txt, color tcolor, bool cleanup)
+std::string colorText(const std::string &txt, color tcolor, bool cleanup)
 {
     std::string text = txt;
 

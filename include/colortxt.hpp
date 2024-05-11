@@ -1,8 +1,11 @@
+#ifndef INCLUDE_COLORTXT_HPP
+#define INCLUDE_COLORTXT_HPP
+
 // #include <string>
 
-enum color
+enum class color
 {
-    red, green, white, reset
+    red, green, white, yellow, light_blue, reset
 };
 
 const char *getColorTxt(color tcolor);
@@ -14,4 +17,6 @@ void coloredText(const char *text, color tcolor = color::reset, const bool endLi
 void cleanupColoredText(const bool endLine = false);
 
 // returns a std::string. use cleanup to return to default color
-std::string colorText(const char *txt, color tcolor, bool cleanup = false);
+std::string colorText(const std::string &txt, color tcolor, bool cleanup = false);
+
+#endif
