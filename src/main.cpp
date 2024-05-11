@@ -10,11 +10,12 @@ Following the book of how to learn OpenGL
 
 #include "colortxt.hpp"
 #include "readfile.hpp"
+#include "logger.hpp"
 
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
-void shaderCompileInfo(unsigned int &shader, const char *shader_type);
+void shaderCompileInfo(unsigned int &shader, std::string shader_type);
 void shaderProgramInfo(unsigned int &program);
 unsigned int compileShader(unsigned int type, const std::string &source);
 unsigned int createShader(const std::string &vertexShader, const std::string &fragmentShader);
@@ -28,6 +29,7 @@ const unsigned int SCR_HEIGHT = 600;
 std::string vertexShaderSource = parseFile(std::string(SHADERS_PATH) + "triangle_shaders/triangle.vert");
 std::string fragmentShaderSource = parseFile(std::string(SHADERS_PATH) + "triangle_shaders/triangle.frag");
 
+Logger logger;
 
 int main(int argc, char *argv[])
 {
@@ -150,7 +152,7 @@ void processInput(GLFWwindow *window)
 }
 
 
-void shaderCompileInfo(unsigned int &shader, const char *shader_type)
+void shaderCompileInfo(unsigned int &shader, const std::string shader_type)
 {
     // Error logging in case there is an error in the shader compilation
     int success;
@@ -159,10 +161,10 @@ void shaderCompileInfo(unsigned int &shader, const char *shader_type)
 
     if(!success) {
         glGetShaderInfoLog(shader, 512, NULL, infoLog);
-        std::cout << colorText("ERROR", color::red, true) <<"::SHADER::"<< shader_type << "::COMPILATION_FAILED\n" <<
-        infoLog << std::endl;
+
+        logger.customLog(LogLevel::ERR, "SHADER ", shader_type, " COMPILATION FAILED\n", infoLog);
     } else {
-        std::cout << colorText("SUCCESS", color::green, true) << "::SHADER::"<< shader_type << "::COMILATION_SUCCEED\n" << std::endl;
+        logger.customLog(LogLevel::INFO, "SHADER ", shader_type," COMPILATION SUCCEED" );
     }
 }
 
@@ -176,12 +178,10 @@ void shaderProgramInfo(unsigned int &program)
 
     if(!success) {
         glGetProgramInfoLog(program, 512, NULL, infoLog);
-        coloredText("ERROR", red);
-        std::cout << "::PROGRAM::LINKING_ERROR\n" << 
-            infoLog << std::endl;
+
+        logger.customLog(LogLevel::ERR, "PROGRAM LINKING FAILED");
     } else {
-        coloredText("SUCCESS", green);
-        std::cout << "::PROGRAM::LINKING_SUCCEED\n" << std::endl;
+        logger.customLog(LogLevel::INFO, "PROGRAM LINKING SUCCEED");
     }
 }
 
