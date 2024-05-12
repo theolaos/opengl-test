@@ -44,18 +44,11 @@ static loggerTermText getColorLogLevel(LogLevel level)
 }
 
 
-// public functions
-// Logger Logger::operator<<(){
-
-// }
-
+// From what level and above should the logger inform to you.
 Logger::Logger(LogLevel level, bool terminalLog, bool fileLog)
-{
-    m_logLevel = level;
-    m_info.type.terminal = terminalLog;
-    m_info.type.file = fileLog;
-}
-
+    :m_logLevel(level), 
+     m_logInfo({{terminalLog, fileLog}})
+{}
 
 
 void Logger::setLogLevel(LogLevel level)
@@ -71,17 +64,20 @@ void Logger::setLogType(LogType type)
 
 
 // private functions
-void Logger::doLogging(logProperties &info)
+void Logger::doLogging(logProperties &logInfo)
 {
-    loggerTermText logPrefix = getColorLogLevel(info.level); 
+    loggerTermText logPrefix = getColorLogLevel(logInfo.level); 
 
-    if (info.type.terminal){
-        // just do the did in the terminal
-        std::cout << colorText( logPrefix.typeText, logPrefix.text_color, true) << info.text << std::endl;
-    }
+    if ( logInfo.level >= m_logInfo.level ) {
+        if ( logInfo.type.terminal ){
+            // just do the did in the terminal
+            std::cout << colorText( logPrefix.typeText, logPrefix.text_color ) << logInfo.text << std::endl;
+        }
 
-    if (info.type.file){
-        // just use the logPrefix.typeText
+        if ( logInfo.type.file ){
+            // just use the logPrefix.typeText
+            std::cout << colorText( "[WARNING] ", color::yellow ) << "File logging is not implemented yet." << std::endl;
+        }
     }
 
 }

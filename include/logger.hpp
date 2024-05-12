@@ -34,7 +34,7 @@ private:
     LogLevel m_logLevel; 
     LogType m_logType;
 
-    logProperties m_info;
+    logProperties m_logInfo;
 
 public:
 
@@ -44,6 +44,7 @@ public:
 
     void setLogType(LogType type);
 
+    // template functions need to be in the header file.
     
     template<typename... Args>
     void customLog(LogLevel level, const Args&... args)
@@ -53,9 +54,9 @@ public:
         (oss << ... << args);
 
         // Output the constructed log message
-        m_info.text = oss.str();
-        m_info.level = level;
-        doLogging(m_info);
+        m_logInfo.text = oss.str();
+        m_logInfo.level = level;
+        doLogging(m_logInfo);
     }
 
 private:

@@ -16,7 +16,7 @@ void coloredText(const char *text, color tcolor = color::reset, const bool endLi
 // uses std::cout
 void cleanupColoredText(const bool endLine = false);
 
-// returns a std::string. use cleanup to return to default color
-std::string colorText(const std::string &txt, color tcolor, bool cleanup = false);
+// returns a std::string. default is cleanup to return to default color
+std::string colorText(const std::string &txt, color tcolor, bool cleanup = true);
 
 #endif
