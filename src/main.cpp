@@ -3,14 +3,15 @@ Following the book of how to learn OpenGL
 */
 
 // FF means Fun Fact
-
 #include <iostream>
+#include <assert.h>
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 
-#include "colortxt.hpp"
+
 #include "readfile.hpp"
 #include "logger.hpp"
+#include "glerror.hpp" 
 
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
@@ -139,7 +140,9 @@ int main(int argc, char *argv[])
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO);
         // glDrawArrays(GL_TRIANGLES, 0, 4); 
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+         
+        glDrawElements(GL_TRIANGLES, 6, GL_INT, nullptr); GCE
+        
 
         //glfwSetWindowPos(window,x,y);
 
