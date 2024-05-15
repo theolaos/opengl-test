@@ -4,6 +4,10 @@
 #include "glad/glad.h"
 #include <iostream>
 
+// 
+static const std::string ERROR_TEXT = colorText("[ERROR]", color::red, true);
+static const std::string OPENGL_TEXT = colorText("[OPENGL]", color::yellow, true);
+
 
 void GLClearError()
 {
@@ -14,7 +18,7 @@ void GLClearError()
 bool GLCheckError(Logger &logger)
 {
     while ( GLenum error = glGetError() ){
-        logger.customLog(LogLevel::ERR, colorText("[OPENGL]", color::yellow, true), 
+        logger.customLog(LogLevel::ERR, OPENGL_TEXT, 
             "Error occured: ", error);
         return false;
     }
@@ -33,32 +37,32 @@ void GLCheckErrorMacro(const char* function, const char *file, int line)
         switch (error)
         {
         case GL_INVALID_ENUM: 
-            std::cout << colorText("[OPENGL] [ERROR]", color::yellow, true) << " GL_INVALID_ENUM" << std::endl;
+            std::cout << ERROR_TEXT << " " << OPENGL_TEXT   << " GL_INVALID_ENUM" << std::endl;
             break;
         case GL_INVALID_VALUE:
-            std::cout << colorText("[OPENGL] [ERROR]", color::yellow, true) << " GL_INVALID_VALUE" << std::endl;
+            std::cout << ERROR_TEXT << " " << OPENGL_TEXT    << " GL_INVALID_VALUE" << std::endl;
             break;
         case GL_INVALID_OPERATION:
-            std::cout << colorText("[OPENGL] [ERROR]", color::yellow, true) << " INVALID_OPERATION" << std::endl;
+            std::cout << ERROR_TEXT << " " << OPENGL_TEXT   << " INVALID_OPERATION" << std::endl;
             break;
         case GL_STACK_OVERFLOW:
-            std::cout << colorText("[OPENGL] [ERROR]", color::yellow, true) << " STACK_OVERFLOW" << std::endl;
+            std::cout << ERROR_TEXT << " " << OPENGL_TEXT   << " STACK_OVERFLOW" << std::endl;
             break;
         case GL_STACK_UNDERFLOW: 
-            std::cout << colorText("[OPENGL] [ERROR]", color::yellow, true) << " STACK_UNDERFLOW" << std::endl;
+            std::cout << ERROR_TEXT << " " << OPENGL_TEXT   << " STACK_UNDERFLOW" << std::endl;
             break;
         case GL_OUT_OF_MEMORY:
-            std::cout << colorText("[OPENGL] [ERROR]", color::yellow, true) << " OUT_OF_MEMORY" << std::endl;
+            std::cout << ERROR_TEXT << " " << OPENGL_TEXT   << " OUT_OF_MEMORY" << std::endl;
             break;
         case GL_INVALID_FRAMEBUFFER_OPERATION:
-            std::cout << colorText("[OPENGL] [ERROR]", color::yellow, true) << " INVALID_FRAMEBUFFER_OPERATION" << std::endl;
+            std::cout << ERROR_TEXT << " " << OPENGL_TEXT   << " INVALID_FRAMEBUFFER_OPERATION" << std::endl;
             break;
         case GL_CONTEXT_LOST:
-            std::cout << colorText("[OPENGL] [ERROR]", color::yellow, true) << " GL_CONTEXT_LOST" << std::endl;
+            std::cout << ERROR_TEXT << " " << OPENGL_TEXT   << " GL_CONTEXT_LOST" << std::endl;
             break;
 
         default:
-            std::cout << colorText("[OPENGL] [ERROR]", color::yellow, true) << "Unknown error code: " << error << std::endl;
+            std::cout << ERROR_TEXT << " " << OPENGL_TEXT   << "Unknown error code: " << error << std::endl;
         }
         printf("Encountered at function '%s' (%s:%d)\n", function, file, line);
     }

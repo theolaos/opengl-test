@@ -20,4 +20,5 @@ void cleanupColoredText(const bool endLine = false);
 // returns a std::string. default is cleanup to return to default color
 std::string colorText(const std::string &txt, color tcolor, bool cleanup = true);
 
+
 #endif

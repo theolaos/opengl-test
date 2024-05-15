@@ -3,14 +3,15 @@ Following the book of how to learn OpenGL
 */
 
 // FF means Fun Fact
-#include <iostream>
-#include "glad/glad.h"
-#include <GLFW/glfw3.h>
-
 
 #include "readfile.hpp"
 #include "logger.hpp"
 #include "glerror.hpp" 
+
+
+#include "glad/glad.h" //relative path
+#include <GLFW/glfw3.h> // general computer path
+#include <iostream>
 
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
@@ -19,7 +20,6 @@ void shaderCompileInfo(unsigned int &shader, std::string shader_type);
 void shaderProgramInfo(unsigned int &program);
 unsigned int compileShader(unsigned int type, const std::string &source);
 unsigned int createShader(const std::string &vertexShader, const std::string &fragmentShader);
-
 
 
 const unsigned int SCR_WIDTH = 800;
