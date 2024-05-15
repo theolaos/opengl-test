@@ -47,7 +47,7 @@ static loggerTermText getColorLogLevel(LogLevel level)
 // From what level and above should the logger inform to you.
 Logger::Logger(LogLevel level, bool terminalLog, bool fileLog)
     :m_logLevel(level), 
-     m_logInfo({{terminalLog, fileLog}})
+     m_logInfo({{fileLog, terminalLog}})
 {}
 
 

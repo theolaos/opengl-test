@@ -79,18 +79,18 @@ int main(int argc, char *argv[])
     // Generating a VBO and a VAO
     unsigned int VBO, VAO;
 
-    glGenVertexArrays(1, &VAO);
+    glGenVertexArrays(1, &VAO);                             GCE
 
     // It stores the id to the VBO variable
-    glGenBuffers(1, &VBO);
+    glGenBuffers(1, &VBO);                                  GCE
 
-    glBindVertexArray(VAO);
+    glBindVertexArray(VAO);                                 GCE
 
     // debunking some stuff
     // std::cout << VBO << std::endl;
     // std::cout << &VBO << std::endl;
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);                     GCE
 
     /*
     Quoting from the book:
@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
     • GL_DYNAMIC_DRAW: the data is changed a lot and used many times
     */
 
-    glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), vertices, GL_STATIC_DRAW);    GCE
 
 
     /* parameters
@@ -114,14 +114,15 @@ int main(int argc, char *argv[])
     5. the stride, the space between consecutive vertex attributes
     6. the starting offset
     */
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0); // from what I know: (void*)0 == NULL
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0);     GCE 
+    // from what I know: (void*)0 == NULL
 
-    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(0);                           GCE
 
-    unsigned int ibo; // index buffer object
-    glGenBuffers(1, &ibo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+    unsigned int ibo; // index buffer object    
+    glGenBuffers(1, &ibo);                                  GCE
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);             GCE
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);   GCE
 
 
 
@@ -130,17 +131,17 @@ int main(int argc, char *argv[])
         processInput(window);
 
         // clear the screen
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);               GCE
+        glClear(GL_COLOR_BUFFER_BIT);                       GCE
 
         // draw the triangle
         // we tell OpenGL that it needs to use this program object.
         // OpenGL will use this program object everytime there is a shader or rendercall.
-        glUseProgram(shaderProgram);
-        glBindVertexArray(VAO);
+        glUseProgram(shaderProgram);                        GCE
+        glBindVertexArray(VAO);                             GCE
         // glDrawArrays(GL_TRIANGLES, 0, 4); 
          
-        glDrawElements(GL_TRIANGLES, 6, GL_INT, nullptr); GCE
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);   GCE
         
 
         //glfwSetWindowPos(window,x,y);
@@ -148,9 +149,9 @@ int main(int argc, char *argv[])
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteProgram(shaderProgram);
+    glDeleteVertexArrays(1, &VAO);                          GCE
+    glDeleteBuffers(1, &VBO);                               GCE
+    glDeleteProgram(shaderProgram);                         GCE
     glfwTerminate();
     return 0;
 }
@@ -175,10 +176,10 @@ void shaderCompileInfo(unsigned int &shader, const std::string shader_type)
     // Error logging in case there is an error in the shader compilation
     int success;
     char infoLog[512]; //FF: it holds 512 bytes in memory
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);     GCE
 
     if(!success) {
-        glGetShaderInfoLog(shader, 512, NULL, infoLog);
+        glGetShaderInfoLog(shader, 512, NULL, infoLog);     GCE
 
         logger.customLog(LogLevel::ERR, "SHADER ", shader_type, " COMPILATION FAILED\n", infoLog);
     } else {
@@ -192,10 +193,10 @@ void shaderProgramInfo(unsigned int &program)
     // Error logging in case there is an error in the shader compilation
     int success;
     char infoLog[512]; //FF: it holds 512 bytes in memory
-    glGetProgramiv(program, GL_LINK_STATUS, &success);
+    glGetProgramiv(program, GL_LINK_STATUS, &success);      GCE
 
     if(!success) {
-        glGetProgramInfoLog(program, 512, NULL, infoLog);
+        glGetProgramInfoLog(program, 512, NULL, infoLog);   GCE
 
         logger.customLog(LogLevel::ERR, "PROGRAM LINKING FAILED");
     } else {
@@ -206,12 +207,12 @@ void shaderProgramInfo(unsigned int &program)
 
 unsigned int compileShader(unsigned int type, const std::string &source)
 {
-    unsigned int id = glCreateShader(type);
+    unsigned int id = glCreateShader(type);                 GCE
     const char *src = source.c_str();
-    glShaderSource(id, 1, &src, NULL);
-    glCompileShader(id);
+    glShaderSource(id, 1, &src, NULL);                      GCE
+    glCompileShader(id);                                    GCE
 
-    shaderCompileInfo(id, (type == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT"));
+    shaderCompileInfo(id, (type == GL_VERTEX_SHADER ? "VERTEX" : "FRAGMENT"));  GCE
 
     return id;
 } 
@@ -219,21 +220,21 @@ unsigned int compileShader(unsigned int type, const std::string &source)
 
 unsigned int createShader(const std::string &vertexShader, const std::string &fragmentShader)
 {
-    unsigned int program = glCreateProgram();
+    unsigned int program = glCreateProgram();               GCE
 
     unsigned int vs, fs; // vs = Vertex shader, fs = fragment shader
 
-    vs = compileShader(GL_VERTEX_SHADER, vertexShader);
-    fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader);
+    vs = compileShader(GL_VERTEX_SHADER, vertexShader);     GCE
+    fs = compileShader(GL_FRAGMENT_SHADER, fragmentShader); GCE
 
-    glAttachShader(program, vs);
-    glAttachShader(program, fs);
-    glLinkProgram(program);
+    glAttachShader(program, vs);                            GCE
+    glAttachShader(program, fs);                            GCE
+    glLinkProgram(program);                                 GCE
 
     shaderProgramInfo(program);
 
-    glDeleteShader(vs);
-    glDeleteShader(fs);
+    glDeleteShader(vs);                                     GCE
+    glDeleteShader(fs);                                     GCE
 
     return program;
 }
