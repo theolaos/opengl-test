@@ -46,6 +46,8 @@ int main(int argc, char *argv[])
         return -1;
     }
     glfwMakeContextCurrent(window);
+    // synchronize with your monitor
+    glfwSwapInterval(1);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
@@ -125,6 +127,20 @@ int main(int argc, char *argv[])
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);   GCE
 
 
+    glUseProgram(shaderProgram);                            GCE
+
+    int location = glGetUniformLocation(shaderProgram, "u_Color"); GCE
+    if (location == -1) {logger.customLog(LogLevel::ERR, "Could not find the uniform location");}    
+    glUniform4f(location, 1.0f, 0.5f, 0.2f, 1.0f);                                          GCE
+
+
+    // draw the triangle
+    // we tell OpenGL that it needs to use this program object.
+    // OpenGL will use this program object everytime there is a shader or rendercall.
+    glBindVertexArray(VAO);                             GCE
+
+    float r(0.0f),g(0.0f),b(0.0f);
+    float incr = 0.01f;
 
     // while loop of the game
     while(!glfwWindowShouldClose(window)) {
@@ -134,11 +150,16 @@ int main(int argc, char *argv[])
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);               GCE
         glClear(GL_COLOR_BUFFER_BIT);                       GCE
 
-        // draw the triangle
-        // we tell OpenGL that it needs to use this program object.
-        // OpenGL will use this program object everytime there is a shader or rendercall.
-        glUseProgram(shaderProgram);                        GCE
-        glBindVertexArray(VAO);                             GCE
+
+        glUniform4f(location, r, 0.5f, 0.2f, 1.0f);                                          GCE
+
+        if (r > 1.0f)
+            incr = -incr;
+        else if (r < 0.0f)
+            incr = -incr;
+
+        r += incr;
+
         // glDrawArrays(GL_TRIANGLES, 0, 4); 
          
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);   GCE
