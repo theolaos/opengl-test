@@ -19,7 +19,11 @@ const char *getColorTxt(color tcolor){
         break;
 
     case color::yellow:
-        return "\033[38;2;255;255;255m";
+        return "\033[38;2;255;249;5m";
+        break;
+
+    case color::orange:
+        return "\033[38;2;247;166;100m";
         break;
 
     case color::light_blue:

@@ -4,7 +4,6 @@ Following the book of how to learn OpenGL
 
 // FF means Fun Fact
 #include <iostream>
-#include <assert.h>
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 

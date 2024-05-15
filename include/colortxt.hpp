@@ -5,7 +5,8 @@
 
 enum class color
 {
-    red, green, white, yellow, light_blue, reset
+    red, green, white, yellow, light_blue, orange, 
+    reset
 };
 
 const char *getColorTxt(color tcolor);
